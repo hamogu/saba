@@ -307,7 +307,10 @@ def make_rsp(data, rsp):
     except AttributeError:
         ndims = len(data.data.get_dims())
 
-    rsp = np.asarray(rsp)
+    if ndims == 1:
+        rsp = np.asarray(rsp)
+    else:
+        rsp = None  # This stops 2d rsps
 
     if data.ndata > 1:
             if rsp.ndim > 1 or rsp.dtype == np.object:
